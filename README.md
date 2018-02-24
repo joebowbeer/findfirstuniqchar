@@ -1,3 +1,3 @@
 # FindFirstUniqChar
 
-Find first unique character in string implemented in Kotlin.
+Find first unique character in string. Kotlin implementation.
