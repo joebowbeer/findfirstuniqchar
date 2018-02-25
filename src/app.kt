@@ -8,7 +8,7 @@
 fun findFirstUniqChar(s: String): Char? {
   val uniques = LinkedHashSet<Char>() // preserves insertion order
   val dupes = HashSet<Char>()
-  for (ch in s.toCharArray()) {
+  s.toCharArray().forEach { ch ->
     if (!dupes.contains(ch)) {
       if (uniques.remove(ch)) {
         dupes.add(ch)
