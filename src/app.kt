@@ -8,6 +8,6 @@
 fun findFirstUniqChar(s: String): Char? {
   // Map each character to uniqueness flag, maintained in LRU order.
   val map = LinkedHashMap<Char, Boolean>(s.length, 0.75f, true)
-  s.toCharArray().forEach { ch -> map.merge(ch, true, { _, _ -> false }) }
+  for (ch in s) map.merge(ch, true, { _, _ -> false })
   return map.iterator().takeIf { it.hasNext() }?.next()?.takeIf { it.value }?.key
 }
