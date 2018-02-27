@@ -6,16 +6,8 @@
  * @return first character that appears only once, or null if none exists
  */
 fun findFirstUniqChar(s: String): Char? {
-  val uniques = LinkedHashSet<Char>() // preserves insertion order
-  val dupes = HashSet<Char>()
-  s.toCharArray().forEach { ch ->
-    if (!dupes.contains(ch)) {
-      if (uniques.remove(ch)) {
-        dupes.add(ch)
-      } else {
-        uniques.add(ch)
-      }
-    }
-  }
-  return uniques.firstOrNull()
+  // Map each character to uniqueness flag, maintained in LRU order.
+  val map = LinkedHashMap<Char, Boolean>(s.length, 0.75f, true)
+  s.toCharArray().forEach { ch -> map.merge(ch, true, { _, _ -> false }) }
+  return map.iterator().takeIf { it.hasNext() }?.next()?.takeIf { it.value }?.key
 }
